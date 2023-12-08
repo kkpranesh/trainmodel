@@ -15,7 +15,7 @@ def extract_text_from_pdf(pdf_path):
             text += page.extract_text()
     return text
 
-# Replace 'your_pdf_path.pdf' with the actual path to your PDF file
+# Replace 'pdf_path' with the actual path to your PDF file
 pdf_text = extract_text_from_pdf("./sample.pdf")
 
 # Step 2: Tokenization
@@ -23,6 +23,7 @@ pretrained_model_name = "bigscience/bloom-560m"
 
 tokenizer = BloomTokenizerFast.from_pretrained(pretrained_model_name)
 tokenized_data = tokenizer(pdf_text, return_tensors='pt', padding=True, truncation=True)
+print(tokenized_data, 'tokenized_data')
 
 # Create a custom dataset
 class CustomDataset(Dataset):
