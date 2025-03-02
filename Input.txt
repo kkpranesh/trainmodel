@@ -1,0 +1,42 @@
+Input
+{
+  "bucket": [
+    {
+      "startTimeMillis": "1708723200000",
+      "endTimeMillis": "1708809600000",
+      "dataset": [
+        {
+          "dataSourceId": "derived:com.google.step_count.delta",
+          "point": [
+            {
+              "startTimeNanos": "1708723200000000000",
+              "endTimeNanos": "1708809600000000000",
+              "value": [{ "intVal": 12000 }]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+
+{
+  "summaryId": "2024-02-24",
+  "steps": 11500,
+  "calories": 2400,
+  "distance": 8.5
+}
+
+Output
+
+{
+  "date": "2024-02-24",
+  "steps": {
+    "google_fit": 12000,
+    "garmin": 11500,
+    "average": 11750
+  },
+  "calories": 2400,
+  "distance_km": 8.5
+}
+
