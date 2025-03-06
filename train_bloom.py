@@ -1,8 +1,8 @@
 from PyPDF2 import PdfReader
 import torch
 from torch.utils.data import Dataset, DataLoader
-from transformers import BloomForCausalLM
-from transformers import BloomTokenizerFast
+from transformers import BioGptForCausalLM
+from transformers import BioGptTokenizer
 
 # Step 1: PDF Text Extraction
 def extract_text_from_pdf(pdf_path):
@@ -19,9 +19,9 @@ def extract_text_from_pdf(pdf_path):
 pdf_text = extract_text_from_pdf("./sample.pdf")
 
 # Step 2: Tokenization
-pretrained_model_name = "bigscience/bloom-560m"
+pretrained_model_name = "microsoft/biogpt"
 
-tokenizer = BloomTokenizerFast.from_pretrained(pretrained_model_name)
+tokenizer = BioGptTokenizer.from_pretrained(pretrained_model_name)
 tokenized_data = tokenizer(pdf_text, return_tensors='pt', padding=True, truncation=True)
 print(tokenized_data, 'tokenized_data')
 
@@ -41,7 +41,7 @@ dataset = CustomDataset(tokenized_data)
 dataloader = DataLoader(dataset, batch_size=2, shuffle=True)
 
 # Step 3: Fine-tuning
-model = BloomForCausalLM.from_pretrained(pretrained_model_name)
+model = BioGptForCausalLM.from_pretrained(pretrained_model_name)
 model.train()
 
 optimizer = torch.optim.AdamW(model.parameters(), lr=1e-5)
@@ -69,5 +69,5 @@ for epoch in range(num_epochs):
     print(f'Epoch {epoch + 1}/{num_epochs}, Loss: {average_loss}')
 
 # Save the fine-tuned model
-model.save_pretrained('bloom_fine_tuned_model')
-tokenizer.save_pretrained('bloom_fine_tuned_model')
+model.save_pretrained('bio_fine_tuned_model')
+tokenizer.save_pretrained('bio_fine_tuned_model')

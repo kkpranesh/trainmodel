@@ -3,8 +3,8 @@ from flask import Flask, render_template, request
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 
-tokenizer = AutoTokenizer.from_pretrained("./bloom_fine_tuned_model/")
-model = AutoModelForCausalLM.from_pretrained("./bloom_fine_tuned_model/")
+tokenizer = AutoTokenizer.from_pretrained("./dp_finetuned/checkpoint-33/")
+model = AutoModelForCausalLM.from_pretrained("./dp_finetuned/checkpoint-33/")
 
 
 # prompt = """Tell me something about"""
